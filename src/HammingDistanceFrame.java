@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -19,40 +21,79 @@ public class HammingDistanceFrame extends JFrame{
 	final static boolean shouldFill = true;
     final static boolean shouldWeightX = true;
     final static boolean RIGHT_TO_LEFT = false;
-	
+	//the tp left label for the hamming distance
+   // private JLabel hamLabel;
+    //the text field for the input
+    //private JTextField haminput;
+    //the slider
+    private JSlider slider;
+    //the show station button
+    private JButton showStation;
+    //the text area for all of the stations
+    private JTextArea textArea;
+    //a text label for to compare
+    private JLabel compare;
+    //button to calculate hamming Distance
+    private JButton calculateHammindDist;
+    //label for distance 
+    private JLabel distance0;
+    //text box for distance 0
+    private JTextField distanceZero;
+    private JLabel distance1;
+    private JTextField distanceOne;
+    private JLabel distance2;
+    private JTextField distanceTwo;
+    private JLabel distance3;
+    private JTextField distanceThree;
+    private JLabel distance4;
+    private JTextField distanceFour;
+    //button to add station
+    private JButton addStation;
+    //text field to input added station
+    private JButton inputStation;
     
-	public static void addComponents(Container pane)
+    
+    
+    /*
+     * The panel that holds all of the project's requirements
+     */
+	public static void firstPanel(Container panel)
 	{
+		//set up the hamming label
+		panel.setLayout(new GridBagLayout());
+		panel.setLocation(0, 0);
+		GridBagConstraints constraints = null;
 		
-		if (RIGHT_TO_LEFT) {
-            pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
-		pane.setSize(300, 1200);
-	    JButton button;
-		pane.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		//if (shouldFill) {
-		//natural height, maximum width
-		//c.fill = GridBagConstraints.HORIZONTAL;
-		//}
-	
-		JLabel label = new JLabel("Button 1");
-		if (shouldWeightX) {
-		c.weightx = 0;
-		}
-		c.gridx = 0;
-		c.gridy = 0;
-		c.insets = new Insets(10, 5, 10, 10);
-		pane.add(label, c);
-	
-		JTextField text = new JTextField();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.05;
-		c.gridx = 1;
-		c.gridy = 0;
-		pane.add(text, c);
-	
+		//set constraints for hamLabel
+		JLabel hamLabel = new JLabel("Enter Hamming Dist:");
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 5, 10, 1);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		panel.add(hamLabel, constraints);
+		
+		//set constraints for hamming input
+		constraints = new GridBagConstraints();
+		JTextField hamInput = new JTextField(10);
+		hamInput.setEditable(false);
+		constraints.insets = new Insets(10, 1, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		panel.add(hamInput, constraints);
+		
+		constraints = new GridBagConstraints();
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 4, 2);
+		slider.setMajorTickSpacing(1);
+		slider.setMinorTickSpacing(1);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		constraints.insets = new Insets(15, 1, 5, 5);
+		constraints.gridx = 1;
+		constraints.gridy = 1;
+		panel.add(slider, constraints);		
 	}
+	
+	
 	
 	
 	/*
@@ -65,8 +106,7 @@ public class HammingDistanceFrame extends JFrame{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Set up the content pane.
-        addComponents(frame.getContentPane());
-
+        firstPanel(frame.getContentPane());
         //Display the window.
         frame.pack();
         frame.setVisible(true);
