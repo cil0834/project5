@@ -26,11 +26,11 @@ public class HammingDistanceFrame extends JFrame{
     //the text field for the input
     //private JTextField haminput;
     //the slider
-    private JSlider slider;
+    //private JSlider slider;
     //the show station button
-    private JButton showStation;
+    //private JButton showStation;
     //the text area for all of the stations
-    private JTextArea textArea;
+   // private JTextArea textArea;
     //a text label for to compare
     private JLabel compare;
     //button to calculate hamming Distance
@@ -66,6 +66,7 @@ public class HammingDistanceFrame extends JFrame{
 		
 		//set constraints for hamLabel
 		JLabel hamLabel = new JLabel("Enter Hamming Dist:");
+		//TODO add action listener
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 5, 10, 1);
 		constraints.gridx = 0;
@@ -75,22 +76,46 @@ public class HammingDistanceFrame extends JFrame{
 		//set constraints for hamming input
 		constraints = new GridBagConstraints();
 		JTextField hamInput = new JTextField(10);
+		//TODO add action listener
 		hamInput.setEditable(false);
 		constraints.insets = new Insets(10, 1, 10, 10);
 		constraints.gridx = 1;
 		constraints.gridy = 0;
 		panel.add(hamInput, constraints);
 		
+		//the slider
 		constraints = new GridBagConstraints();
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 4, 2);
 		slider.setMajorTickSpacing(1);
 		slider.setMinorTickSpacing(1);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
-		constraints.insets = new Insets(15, 1, 5, 5);
-		constraints.gridx = 1;
+		//TODO add action listener
+		constraints.insets = new Insets(5, 1, 5, 5);
+		constraints.gridx = 0;
 		constraints.gridy = 1;
+		constraints.gridwidth = 2;
 		panel.add(slider, constraints);		
+		
+		//the showStation button
+		constraints = new GridBagConstraints();
+		JButton showStation = new JButton("Show Station");
+		//TODO add action listener
+		constraints.insets = new  Insets(10, 5, 10, 1);
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		panel.add(showStation, constraints);
+		
+		//JTextArea
+		constraints = new GridBagConstraints();
+		JTextArea textArea = new JTextArea(20, 20);
+		//TODO add action listener
+		constraints.insets = new Insets(5, 5, 10, 5);
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		constraints.gridwidth = 2;
+		panel.add(textArea, constraints);
+		
 	}
 	
 	
