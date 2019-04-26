@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,7 +33,7 @@ public class HammingDistanceFrame extends JFrame{
     //the text area for all of the stations
    // private JTextArea textArea;
     //a text label for to compare
-    private JLabel compare;
+  //  private JLabel compare;
     //button to calculate hamming Distance
     private JButton calculateHammindDist;
     //label for distance 
@@ -67,6 +68,7 @@ public class HammingDistanceFrame extends JFrame{
 		//set constraints for hamLabel
 		JLabel hamLabel = new JLabel("Enter Hamming Dist:");
 		//TODO add action listener
+		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 5, 10, 1);
 		constraints.gridx = 0;
@@ -74,9 +76,10 @@ public class HammingDistanceFrame extends JFrame{
 		panel.add(hamLabel, constraints);
 		
 		//set constraints for hamming input
-		constraints = new GridBagConstraints();
-		JTextField hamInput = new JTextField(10);
+		JTextField hamInput = new JTextField(12);
 		//TODO add action listener
+		
+		constraints = new GridBagConstraints();
 		hamInput.setEditable(false);
 		constraints.insets = new Insets(10, 1, 10, 10);
 		constraints.gridx = 1;
@@ -84,13 +87,14 @@ public class HammingDistanceFrame extends JFrame{
 		panel.add(hamInput, constraints);
 		
 		//the slider
-		constraints = new GridBagConstraints();
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 4, 2);
 		slider.setMajorTickSpacing(1);
 		slider.setMinorTickSpacing(1);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
 		//TODO add action listener
+		
+		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(5, 1, 5, 5);
 		constraints.gridx = 0;
 		constraints.gridy = 1;
@@ -98,23 +102,48 @@ public class HammingDistanceFrame extends JFrame{
 		panel.add(slider, constraints);		
 		
 		//the showStation button
-		constraints = new GridBagConstraints();
 		JButton showStation = new JButton("Show Station");
 		//TODO add action listener
+		
+		constraints = new GridBagConstraints();
 		constraints.insets = new  Insets(10, 5, 10, 1);
 		constraints.gridx = 0;
 		constraints.gridy = 2;
 		panel.add(showStation, constraints);
 		
 		//JTextArea
-		constraints = new GridBagConstraints();
 		JTextArea textArea = new JTextArea(20, 20);
 		//TODO add action listener
-		constraints.insets = new Insets(5, 5, 10, 5);
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(5, 20, 10, 5);
 		constraints.gridx = 0;
 		constraints.gridy = 3;
 		constraints.gridwidth = 2;
 		panel.add(textArea, constraints);
+		
+		//JLabel for compare with dropdown
+		JLabel compare = new JLabel("Compare with:");
+		//TODO add button listener
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(20, 5, 20, 1);
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		panel.add(compare, constraints);
+		
+		//JComboBox
+		String[] comparison = new String[50];
+		JComboBox comparedStrings = new JComboBox(comparison);
+		comparedStrings.setPrototypeDisplayValue("text here");
+		//TODO set up combobox
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(15, 1, 15, 1);
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		panel.add(comparedStrings, constraints);
+		
 		
 	}
 	
