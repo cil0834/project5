@@ -1,7 +1,10 @@
+import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
@@ -35,7 +38,7 @@ public class HammingDistanceFrame extends JFrame{
     //a text label for to compare
   //  private JLabel compare;
     //button to calculate hamming Distance
-    private JButton calculateHammindDist;
+    //private JButton calculateHammindDist;
     //label for distance 
     private JLabel distance0;
     //text box for distance 0
@@ -67,7 +70,6 @@ public class HammingDistanceFrame extends JFrame{
 		
 		//set constraints for hamLabel
 		JLabel hamLabel = new JLabel("Enter Hamming Dist:");
-		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 5, 10, 1);
@@ -143,27 +145,155 @@ public class HammingDistanceFrame extends JFrame{
 		constraints.gridx = 1;
 		constraints.gridy = 4;
 		panel.add(comparedStrings, constraints);
+	
+		//Calculate button
+		JButton calculate = new JButton("Calculate HD");
+		//TODO make calculate button work
 		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 5, 15, 0);
+		constraints.gridx = 0;
+		constraints.gridy = 5;
+		panel.add(calculate, constraints);
+	
+		//JLabel0
+		JLabel label0 = new JLabel("Distance 0");
 		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.gridx = 0;
+		constraints.gridy = 6;
+		panel.add(label0, constraints);
+		
+		//JLabel1
+		JLabel label1 = new JLabel("Distance 1");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.gridx = 0;
+		constraints.gridy = 7;
+		panel.add(label1, constraints);
+		
+		//JLabel2
+		JLabel label2 = new JLabel("Distance 2");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.gridx = 0;
+		constraints.gridy = 8;
+		panel.add(label2, constraints);
+		
+		//JLabel3
+		JLabel label3 = new JLabel("Distance 3");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.gridx = 0;
+		constraints.gridy = 9;
+		panel.add(label3, constraints);
+		
+		//JLabel4
+		JLabel label4 = new JLabel("Distance 4");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.gridx = 0;
+		constraints.gridy = 10;
+		panel.add(label4, constraints);
+		
+		//JTextField0
+		JTextField textField0 = new JTextField(12);
+		textField0.setEditable(false);
+		//TODO
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 6;
+		panel.add(textField0, constraints);
+		
+		//JTextField1
+		JTextField textField1 = new JTextField(12);
+		textField1.setEditable(false);
+		//TODO
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 7;
+		panel.add(textField1, constraints);
+		
+		//JTextField2
+		JTextField textField2 = new JTextField(12);
+		textField2.setEditable(false);
+		//TODO
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 8;
+		panel.add(textField2, constraints);
+		
+		//JTextField3
+		JTextField textField3 = new JTextField(12);
+		textField3.setEditable(false);
+		//TODO
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 9;
+		panel.add(textField3, constraints);
+		
+		//JTextField4
+		JTextField textField4 = new JTextField(12);
+		textField4.setEditable(false);
+		//TODO
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 10;
+		panel.add(textField4, constraints);
+		
+		//add station button
+		JButton addStation = new JButton("Add Station");
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(15, 20, 10, 10);
+		constraints.gridx = 0;
+		constraints.gridy = 11;
+		panel.add(addStation, constraints);
+		
+		//add station textField
+		JTextField stationAdd = new JTextField(12);
+		stationAdd.setEnabled(true);
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(15, 20, 10, 10);
+		constraints.gridx = 1;
+		constraints.gridy = 11;
+		panel.add(stationAdd, constraints);
+		
+			
 	}
+
 	
 	
-	
-	
-	/*
+    
+    
+    /*
 	 * Making the actual frame
 	 */
 	 private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("GridBagLayoutDemo");
-        frame.setSize(600, 1200);
+        //frame.setSize(600, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(2,1));
 
         //Set up the content pane.
         firstPanel(frame.getContentPane());
+        //secondPanel(frame.getContentPane());
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        
+        
 	    }
 	
 	
