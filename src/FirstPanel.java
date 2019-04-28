@@ -4,7 +4,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,32 +17,108 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+/**
+ * A class that represents the first and possibly only panel in the jFrame. 
+ * The panel does various things with the mesonet strings.
+ * Using various components the strings in the Mesonet file have their hamming distance and their average ascii values compared.
+ * @author caleb
+ *
+ */
 public class FirstPanel extends JPanel{
 	
-	//the word that is being added
+	//The word that is being added
+	private String writenWord = "";
+	
+	//The word selected by the JComboBox
 	private String chosenWord = "";
+	
 	//ArrayList of mesoNet file
-	//ArrayList<String> meso;
+	private ArrayList<String> meso;
 	
+	//a boolean used to see if a string is valid
+	private boolean valid = true;
 	
-	private JTextField stationAdd;
+	//The label that says "Enter Hammind Dist:"
+	private JLabel hamLabel;
+	
+	//The JTextField that represents the value of the JSlider 1-4
+	private JTextField hamInput;
+	
+	//The JSlider that affects the hamInput and whose value is used to decide what strings the textArea box shows. 
+	//The slider has values 1-4, which represent the hamming distance of strings.
+	private JSlider slider; 
+	
+	//The button that actually decides when the textArea shows the strings
+	private JButton showStation; 
+	
+	//The text area that shows the strings that have the specified hamming distance according to the JSlider's value
+	private JTextArea textArea; 
+	
+	//A JLabel that says "Compare with"
+	private JLabel compare; 
+	
+	//A combobox that holds the string values that are compared and can be compared with each other
+	private JComboBox<String> comparedStrings;
+	
+	//The calculate button that when pressed calculates the hamming distance that each string has when compared with the chosen string
+	//The values are then added up and the total number of strings with a hamming distance of 0-4 can be seen in their respective boxes
+	private JButton calculate;
+	
+	//A label that says "Distance 0"
+	private JLabel label0;
+	
+	//A label that says "Distance 1"
+	private JLabel label1;
+	
+	//A label that says 'Distance 2"
+	private JLabel label2;
+	
+	//A label that says "Distance 3"
+	private JLabel label3;
+	
+	//A label that says "Distance 4"
+	private JLabel label4;
+	
+	//A JTextField that has the number of strigs with a hamming distance of 0 when compared to the chosen string
+	private JTextField textField0;
+	
+	//A JTextField that has the number of strigs with a hamming distance of 1 when compared to the chosen string
+	private JTextField textField1;
+	
+	//A JTextField that has the number of strigs with a hamming distance of 2 when compared to the chosen string
+	private JTextField textField2;
+	
+	//A JTextField that has the number of strigs with a hamming distance of 3 when compared to the chosen string
+	private JTextField textField3;
+	
+	//A JTextField that has the number of strigs with a hamming distance of 4 when compared to the chosen string
+	private JTextField textField4;
+	
+	//A button that when pressed takes the value of the stationAdd TextField and adds it to the JComboBox if the string is valid
 	private JButton addStation;
-	private JComboBox comparedStrings;
+	
+	//A TextField where the user can input a string if valid
+	private JTextField stationAdd;
+	
+	//A TextField that says if the string is valid or not
+	private JTextField validTextBox;
+	
+	//A JLabel that says "Valid word:"
+	private JLabel test;
+	//private ReadFile file = new ReadFile(); 
 	
 	
-	public FirstPanel()
-	{	/*
-		ReadFile file = new ReadFile();
-		meso = file.getListOfWords();
-		*/
+	public FirstPanel() throws IOException
+	{	
 		//set up the hamming label
 		this.setLayout(new GridBagLayout());
 		this.setLocation(0, 0);
 		GridBagConstraints constraints = null;
 		
 		//set constraints for hamLabel
-		JLabel hamLabel = new JLabel("Enter Hamming Dist:");
+		hamLabel = new JLabel("Enter Hamming Dist:");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 5, 10, 1);
@@ -49,7 +127,7 @@ public class FirstPanel extends JPanel{
 		this.add(hamLabel, constraints);
 		
 		//set constraints for hamming input
-		JTextField hamInput = new JTextField(12);
+		hamInput = new JTextField(12);
 		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
@@ -60,12 +138,18 @@ public class FirstPanel extends JPanel{
 		this.add(hamInput, constraints);
 		
 		//the slider
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 4, 2);
+		slider = new JSlider(JSlider.HORIZONTAL, 1, 4, 2);
 		slider.setMajorTickSpacing(1);
 		slider.setMinorTickSpacing(1);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
 		//TODO add action listener
+		 slider.addChangeListener(new ChangeListener(){
+	            @Override
+	            public void stateChanged(ChangeEvent e) {
+	               hamInput.setText(String.valueOf(slider.getValue()));
+	            }
+	        });
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(5, 1, 5, 5);
@@ -75,7 +159,7 @@ public class FirstPanel extends JPanel{
 		this.add(slider, constraints);		
 		
 		//the showStation button
-		JButton showStation = new JButton("Show Station");
+		showStation = new JButton("Show Station");
 		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
@@ -83,9 +167,9 @@ public class FirstPanel extends JPanel{
 		constraints.gridx = 0;
 		constraints.gridy = 2;
 		this.add(showStation, constraints);
-		
+		 
 		//JTextArea
-		JTextArea textArea = new JTextArea(20, 20);
+		textArea = new JTextArea(20, 20);
 		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
@@ -96,7 +180,7 @@ public class FirstPanel extends JPanel{
 		this.add(textArea, constraints);
 		
 		//JLabel for compare with dropdown
-		JLabel compare = new JLabel("Compare with:");
+		compare = new JLabel("Compare with:");
 		//TODO add button listener
 		
 		constraints = new GridBagConstraints();
@@ -104,18 +188,20 @@ public class FirstPanel extends JPanel{
 		constraints.gridx = 0;
 		constraints.gridy = 4;
 		this.add(compare, constraints);
-		
+	
 		//JComboBox
-		comparedStrings = new JComboBox();
+		comparedStrings = new JComboBox<String>();
 		//TODO set up combobox
+		//ReadFile file = new ReadFile();
+		//meso = new ArrayList<String>();
+		//meso = file.getListOfWords();
 		String tempString = "";
-		/*for (int index = 0; index < meso.size(); ++index)
-		{
-			tempString = meso.get(index);
-			comparedStrings.addItem(tempString);
-		}
-		*/
+		
+		//comparedStrings.addItem(meso.get(index));
+		
+		
 		comparedStrings.addItem(chosenWord);
+	
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(15, 1, 15, 1);
@@ -124,7 +210,7 @@ public class FirstPanel extends JPanel{
 		this.add(comparedStrings, constraints);
 	
 		//Calculate button
-		JButton calculate = new JButton("Calculate HD");
+		calculate = new JButton("Calculate HD");
 		//TODO make calculate button work
 		
 		constraints = new GridBagConstraints();
@@ -134,7 +220,7 @@ public class FirstPanel extends JPanel{
 		this.add(calculate, constraints);
 	
 		//JLabel0
-		JLabel label0 = new JLabel("Distance 0");
+		label0 = new JLabel("Distance 0");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 20);
@@ -143,7 +229,7 @@ public class FirstPanel extends JPanel{
 		this.add(label0, constraints);
 		
 		//JLabel1
-		JLabel label1 = new JLabel("Distance 1");
+		label1 = new JLabel("Distance 1"); 
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 20);
@@ -152,7 +238,7 @@ public class FirstPanel extends JPanel{
 		this.add(label1, constraints);
 		
 		//JLabel2
-		JLabel label2 = new JLabel("Distance 2");
+		label2 = new JLabel("Distance 2");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 20);
@@ -161,7 +247,7 @@ public class FirstPanel extends JPanel{
 		this.add(label2, constraints);
 		
 		//JLabel3
-		JLabel label3 = new JLabel("Distance 3");
+		label3 = new JLabel("Distance 3");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 20);
@@ -170,7 +256,7 @@ public class FirstPanel extends JPanel{
 		this.add(label3, constraints);
 		
 		//JLabel4
-		JLabel label4 = new JLabel("Distance 4");
+		label4 = new JLabel("Distance 4");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 20);
@@ -179,7 +265,7 @@ public class FirstPanel extends JPanel{
 		this.add(label4, constraints);
 		
 		//JTextField0
-		JTextField textField0 = new JTextField(12);
+		textField0 = new JTextField(12);
 		textField0.setEditable(false);
 		//TODO
 		constraints = new GridBagConstraints();
@@ -189,7 +275,7 @@ public class FirstPanel extends JPanel{
 		this.add(textField0, constraints);
 		
 		//JTextField1
-		JTextField textField1 = new JTextField(12);
+		textField1 = new JTextField(12);
 		textField1.setEditable(false);
 		//TODO
 		constraints = new GridBagConstraints();
@@ -199,7 +285,7 @@ public class FirstPanel extends JPanel{
 		this.add(textField1, constraints);
 		
 		//JTextField2
-		JTextField textField2 = new JTextField(12);
+		textField2 = new JTextField(12);
 		textField2.setEditable(false);
 		//TODO
 		constraints = new GridBagConstraints();
@@ -209,7 +295,7 @@ public class FirstPanel extends JPanel{
 		this.add(textField2, constraints);
 		
 		//JTextField3
-		JTextField textField3 = new JTextField(12);
+		textField3 = new JTextField(12);
 		textField3.setEditable(false);
 		//TODO
 		constraints = new GridBagConstraints();
@@ -219,7 +305,7 @@ public class FirstPanel extends JPanel{
 		this.add(textField3, constraints);
 		
 		//JTextField4
-		JTextField textField4 = new JTextField(12);
+		textField4 = new JTextField(12);
 		textField4.setEditable(false);
 		//TODO
 		constraints = new GridBagConstraints();
@@ -255,26 +341,60 @@ public class FirstPanel extends JPanel{
 		this.add(stationAdd, constraints);
 		
 		//the error message
-		JLabel test = new JLabel("You are free to put what ever you want here");
+		test = new JLabel("Valid word");
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 10, 10 ,10);
 		constraints.gridx = 3;
 		constraints.gridy = 0;
-		constraints.gridwidth= 3;
-		this.add(test, constraints);
+		this.add(test, constraints); 
 		
+		
+		validTextBox = new JTextField(12);
+		validTextBox.setEditable(false);
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 20, 10, 10);
+		constraints.gridx = 4;
+		constraints.gridy = 0;
+		this.add(validTextBox, constraints);
 		
 		}
+	
+	
+	/**
+	 * The button for the JButton CalculateHD
+	 * @author caleb
+	 *
+	 */
+	public class calculateHD implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			
+		}
+	};
+	
+	
+	
+	/**
+	 * The actionLitener for the addStation button that adds a word to the JComboBox only if the word is 4 characters long and capitalized
+	 * The validTextBox is set to "Valid String" if added correctly other wise it is set to "Invalid String"
+	 * @author caleb
+	 *
+	 */
 	 public class addWord implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-    	chosenWord = stationAdd.getText();
+    	writenWord = stationAdd.getText();
     	Calculation calc = new Calculation();
-    	boolean valid = calc.validString(chosenWord);
+    	valid = calc.validString(writenWord);
     	if (valid) {
-    	comparedStrings.addItem(stationAdd.getText()); //Removed .toString() because it returns a string.
+    	comparedStrings.addItem(stationAdd.getText()); 
+    	validTextBox.setText("Valid String");
+    	}
+    	if(!valid)
+    	{
+    		validTextBox.setText("Invalid String");
     	}
         }
 	    }
-	
+	 
 }

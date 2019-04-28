@@ -28,5 +28,14 @@ public class Calculation {
 		return true;
 	}
 	
+	public int hammingDistance(String word)
+	{
+		
+		
+		
+		
+		return 0;
+	}
+	
 	
 }
