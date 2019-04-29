@@ -105,9 +105,10 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		//used to keep count of the distance
 		int distance = 0;
 		String tempWord = "";
-		char[] tempWordArray = new char[4];
-		char[] chosenWordArray = new char[4];
-		
+		//char[] tempWordArray = new char[4];
+		//char[] chosenWordArray = new char[4];
+		char temp;
+		char realChar;
 		/**
 		 * A for loop to iterate through the listOfWords array list. The first for loop resets the distance variable and initializes 
 		 * temp word with the next word in listOfWords.
@@ -117,11 +118,14 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		 */
 		for(int index = 0; index < listOfWords.size(); ++index)
 		{
+			//temp = tempWord.charAt(index)
+			//realChar = word.charAt(index)
 			distance = 0;
 			tempWord = listOfWords.get(index);
 			for (int i = 0; i < tempWord.length(); ++i)
 			{
-				if(word.charAt(index) != tempWord.charAt(index))
+				
+				if(word.charAt(i) != tempWord.charAt(i))
 				{
 					++distance;
 				}

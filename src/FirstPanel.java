@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -57,10 +58,6 @@ public class FirstPanel extends JPanel{
 	private boolean valid = true;
 	
 	
-	
-	
-	
-	
 	//The label that says "Enter Hammind Dist:"
 	private JLabel hamLabel;
 	
@@ -76,6 +73,8 @@ public class FirstPanel extends JPanel{
 	
 	//The text area that shows the strings that have the specified hamming distance according to the JSlider's value
 	private JTextArea textArea; 
+	
+	private JScrollPane sp; 
 	
 	//A JLabel that says "Compare with"
 	private JLabel compare; 
@@ -191,14 +190,17 @@ public class FirstPanel extends JPanel{
 		this.add(showStation, constraints);
 		 
 		//JTextArea
-		textArea = new JTextArea(20, 20);
+		textArea = new JTextArea(5, 10);
+		textArea.setEditable(false);
+		sp = new JScrollPane(textArea);
+		this.add(sp);
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(5, 20, 10, 5);
 		constraints.gridx = 0;
 		constraints.gridy = 3;
 		constraints.gridwidth = 2;
-		this.add(textArea, constraints);
+		this.add(sp, constraints);
 		
 		//JLabel for compare with dropdown
 		compare = new JLabel("Compare with:");
@@ -389,15 +391,20 @@ public class FirstPanel extends JPanel{
 	public class showStation implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
-			//setHam input text to an int
-			int input = Integer.parseInt(hamInput.getText());
 			
+			
+			//setHam input text to an int
+			int input = slider.getValue();
+			String text = "";
+			String tempString ="";
 			//shows strings with hamming distance of one
 			if(input == 1)
 			{
 				for(int index = 0; index < arrayOne.size(); ++index)
 				{
-					textArea.setText(arrayOne.get(index));
+					//textArea.setText(arrayOne.get(index));
+					tempString = arrayOne.get(index);
+					text = text + tempString + "\n";
 				}
 			}
 			
@@ -406,7 +413,9 @@ public class FirstPanel extends JPanel{
 			{
 				for(int index = 0; index < arrayTwo.size(); ++index)
 				{
-					textArea.setText(arrayTwo.get(index));
+					//textArea.setText(arrayTwo.get(index));
+					tempString = arrayTwo.get(index);
+					text = text + tempString + "\n";
 				}
 			}
 			
@@ -415,7 +424,9 @@ public class FirstPanel extends JPanel{
 			{
 				for(int index = 0; index < arrayThree.size(); ++index)
 				{
-					textArea.setText(arrayThree.get(index));
+					//textArea.setText(arrayThree.get(index));
+					tempString = arrayThree.get(index);
+					text = text + tempString + "\n";
 				}
 			}
 			
@@ -424,9 +435,12 @@ public class FirstPanel extends JPanel{
 			{
 				for(int index = 0; index < arrayFour.size(); ++index)
 				{
-					textArea.setText(arrayFour.get(index));
+					//textArea.setText(arrayFour.get(index));
+					tempString = arrayFour.get(index);
+					text = text + tempString + "\n";
 				}
 			}
+			textArea.setText(text);
 		}
 	}
 	
@@ -479,6 +493,7 @@ public class FirstPanel extends JPanel{
     	Calculation calc = new Calculation();
     	valid = calc.validString(writenWord);
     	if (valid) {
+    	meso.add(writenWord);
     	comparedStrings.addItem(stationAdd.getText()); 
     	validTextBox.setText("Valid String");
     	//meso.add(writenWord);
