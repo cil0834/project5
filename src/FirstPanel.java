@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,8 +36,11 @@ public class FirstPanel extends JPanel{
 	//The word selected by the JComboBox
 	private String chosenWord = "";
 	
+	//Object that reads an object
+	private ReadFile file = new ReadFile(); 
+	
 	//ArrayList of mesoNet file
-	private ArrayList<String> meso;
+	private ArrayList<String> meso = file.getListOfWords();
 	
 	//ArrayList that holds the strings with a hamming distance of 0
 	private ArrayList<String> arrayZero;
@@ -44,7 +48,7 @@ public class FirstPanel extends JPanel{
 	//ArrayList that holds the strings with a hamming distance of 1
 	private ArrayList<String> arrayOne;
 	
-	//ArrayList that holds the strings with a hamming distance of 2
+	//ArrayList that holds the strings with a hamming distance of 2 
 	private ArrayList<String> arrayTwo;
 	
 	//ArrayList that holds the strings with a hamming distance of 3
@@ -127,8 +131,7 @@ public class FirstPanel extends JPanel{
 	
 	//A JLabel that says "Valid word:"
 	private JLabel test;
-	//TODO
-	private ReadFile file = new ReadFile(); 
+
 	
 	
 	public FirstPanel() throws IOException
@@ -215,17 +218,12 @@ public class FirstPanel extends JPanel{
 		comparedStrings = new JComboBox<String>();
 		//TODO set up combobox
 		
-		meso = new ArrayList<String>();
-		meso = file.getListOfWords();
-		
 		//for loop that adds the strings to the jcombobox
 		for(int index = 0; index < meso.size(); ++index)
 		{
 		comparedStrings.addItem(meso.get(index));
 		}
-		
-		
-		comparedStrings.addItem(writenWord);
+		//comparedStrings.addItem(writenWord);
 	
 		
 		constraints = new GridBagConstraints();
@@ -390,9 +388,6 @@ public class FirstPanel extends JPanel{
 	
 	public class showStation implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			
-			
-			
 			//setHam input text to an int
 			int input = slider.getValue();
 			String text = "";
@@ -406,6 +401,7 @@ public class FirstPanel extends JPanel{
 					tempString = arrayOne.get(index);
 					text = text + tempString + "\n";
 				}
+				textArea.setText(text);
 			}
 			
 			//shows strings with hamming distance of two
@@ -417,6 +413,7 @@ public class FirstPanel extends JPanel{
 					tempString = arrayTwo.get(index);
 					text = text + tempString + "\n";
 				}
+				textArea.setText(text);
 			}
 			
 			//shows strings with hamming distance of three
@@ -428,6 +425,7 @@ public class FirstPanel extends JPanel{
 					tempString = arrayThree.get(index);
 					text = text + tempString + "\n";
 				}
+				textArea.setText(text);
 			}
 			
 			//shows strings with hamming distance of four
@@ -439,8 +437,8 @@ public class FirstPanel extends JPanel{
 					tempString = arrayFour.get(index);
 					text = text + tempString + "\n";
 				}
+				textArea.setText(text);
 			}
-			textArea.setText(text);
 		}
 	}
 	
@@ -459,7 +457,7 @@ public class FirstPanel extends JPanel{
 		public void actionPerformed(ActionEvent e)
 		{
 			chosenWord = (String) comparedStrings.getSelectedItem();
-			file.hammingDistances(chosenWord);
+			file.hammingDistances(chosenWord, meso);
 			
 			// set the text fields with their values
 			textField0.setText(Integer.toString(file.getHamZero()));
@@ -494,7 +492,8 @@ public class FirstPanel extends JPanel{
     	valid = calc.validString(writenWord);
     	if (valid) {
     	meso.add(writenWord);
-    	comparedStrings.addItem(stationAdd.getText()); 
+    	Collections.sort(meso);
+    	comparedStrings.addItem(stationAdd.getText());
     	validTextBox.setText("Valid String");
     	//meso.add(writenWord);
     	}

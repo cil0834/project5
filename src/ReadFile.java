@@ -91,10 +91,12 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	
 	/**
 	 * method that determines the hamming distance for each word compared to the chosen word
+	 * The method takes the chosen word as an arguement
+	 * The other arguement is an arrayList of the words in teh JComboBox
 	 * This method also keeps count of the number of words with a hamming distance of 0, 1, 2, 3, 4
 	 * This method also adds the strings to their respective arrayList based off of their hammingdistance
 	 */
-	public void hammingDistances(String word)
+	public void hammingDistances(String word, ArrayList<String> meso)
 	{
 		hammingZero = 0;
 		hammingOne = 0;
@@ -105,10 +107,6 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		//used to keep count of the distance
 		int distance = 0;
 		String tempWord = "";
-		//char[] tempWordArray = new char[4];
-		//char[] chosenWordArray = new char[4];
-		char temp;
-		char realChar;
 		/**
 		 * A for loop to iterate through the listOfWords array list. The first for loop resets the distance variable and initializes 
 		 * temp word with the next word in listOfWords.
@@ -116,12 +114,12 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		 * The second for loop compares the individual characters of the words annd increments distance if the characters are equal.
 		 * After the strings are compared the distances are determined and the temp word is put into its respective arrayList
 		 */
-		for(int index = 0; index < listOfWords.size(); ++index)
+		for(int index = 0; index < meso.size(); ++index)
 		{
 			//temp = tempWord.charAt(index)
 			//realChar = word.charAt(index)
 			distance = 0;
-			tempWord = listOfWords.get(index);
+			tempWord = meso.get(index);
 			for (int i = 0; i < tempWord.length(); ++i)
 			{
 				
@@ -143,13 +141,13 @@ private ArrayList<String> listFour = new ArrayList<String>();
 				listOne.add(tempWord); 
 			}
 			
-			else if(distance ==2)
+			if(distance ==2)
 			{
 				++hammingTwo;
 				listTwo.add(tempWord); 
 			}
 			
-			else if(distance == 3)
+			if(distance == 3)
 			{
 				++hammingThree;
 				listThree.add(tempWord); 
@@ -162,6 +160,7 @@ private ArrayList<String> listFour = new ArrayList<String>();
 			}
 		}
 	}
+	
 	
 	/**
 	 * returns hamZero
