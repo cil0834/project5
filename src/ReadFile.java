@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * A Class that reads the mesonet file and determines the hamming distance of the strings.
+ * The class sorts the strings into arrays based off of their hamming distance
+ * Also the class keeps count of the number of strings with a hamming distance of 0, 1, 2, 3, 4 compared to the chosenWord
  * @author caleb
  *
  */
@@ -68,17 +70,18 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	
 	
 	/**
-	 * The constructor initializes the arrayList and fills it up with the Mesonet Strings
+	 * The constructor initializes the arrayList and fills it up with all of the words in the mesonetfile
 	 * @throws IOException
 	 */
 	public ReadFile() throws IOException
 	{
 		listOfWords = new ArrayList<String>();
 		
-		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt")); 
+		BufferedReader br = new BufferedReader(new FileReader("Mesonet")); 
 		String tempString = br.readLine();
 		
-		while(tempString != null || tempString != "")
+		//while there is still a valid word
+		while(tempString != null)
 		{
 			listOfWords.add(tempString);
 			tempString = br.readLine(); 
@@ -88,6 +91,8 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	
 	/**
 	 * method that determines the hamming distance for each word compared to the chosen word
+	 * This method also keeps count of the number of words with a hamming distance of 0, 1, 2, 3, 4
+	 * This method also adds the strings to their respective arrayList based off of their hammingdistance
 	 */
 	public void hammingDistances(String word)
 	{
@@ -96,9 +101,12 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		hammingTwo = 0;
 		hammingThree = 0;
 		hammingFour= 0;
+		
 		//used to keep count of the distance
 		int distance = 0;
 		String tempWord = "";
+		char[] tempWordArray = new char[4];
+		char[] chosenWordArray = new char[4];
 		
 		/**
 		 * A for loop to iterate through the listOfWords array list. The first for loop resets the distance variable and initializes 
@@ -113,7 +121,7 @@ private ArrayList<String> listFour = new ArrayList<String>();
 			tempWord = listOfWords.get(index);
 			for (int i = 0; i < tempWord.length(); ++i)
 			{
-				if(word.charAt(index) == tempWord.charAt(index))
+				if(word.charAt(index) != tempWord.charAt(index))
 				{
 					++distance;
 				}
@@ -131,13 +139,13 @@ private ArrayList<String> listFour = new ArrayList<String>();
 				listOne.add(tempWord); 
 			}
 			
-			if(distance ==2)
+			else if(distance ==2)
 			{
 				++hammingTwo;
 				listTwo.add(tempWord); 
 			}
 			
-			if(distance == 3)
+			else if(distance == 3)
 			{
 				++hammingThree;
 				listThree.add(tempWord); 
@@ -186,7 +194,7 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	/**
 	 * returns hamFour
 	 */
-	public int getHaFour()
+	public int getHamFour()
 	{
 		return hammingFour;
 	}
@@ -230,7 +238,6 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	{
 		return listFour;
 	}
-	
 	
 	
 	/**

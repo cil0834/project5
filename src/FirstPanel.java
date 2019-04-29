@@ -37,8 +37,29 @@ public class FirstPanel extends JPanel{
 	//ArrayList of mesoNet file
 	private ArrayList<String> meso;
 	
+	//ArrayList that holds the strings with a hamming distance of 0
+	private ArrayList<String> arrayZero;
+	
+	//ArrayList that holds the strings with a hamming distance of 1
+	private ArrayList<String> arrayOne;
+	
+	//ArrayList that holds the strings with a hamming distance of 2
+	private ArrayList<String> arrayTwo;
+	
+	//ArrayList that holds the strings with a hamming distance of 3
+	private ArrayList<String> arrayThree;
+	
+	//ArrayList that holds the strings with a hamming distance of 4
+	private ArrayList<String> arrayFour;
+	
+	
 	//a boolean used to see if a string is valid
 	private boolean valid = true;
+	
+	
+	
+	
+	
 	
 	//The label that says "Enter Hammind Dist:"
 	private JLabel hamLabel;
@@ -107,7 +128,8 @@ public class FirstPanel extends JPanel{
 	
 	//A JLabel that says "Valid word:"
 	private JLabel test;
-	//private ReadFile file = new ReadFile(); 
+	//TODO
+	private ReadFile file = new ReadFile(); 
 	
 	
 	public FirstPanel() throws IOException
@@ -128,7 +150,6 @@ public class FirstPanel extends JPanel{
 		
 		//set constraints for hamming input
 		hamInput = new JTextField(12);
-		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
 		hamInput.setEditable(false);
@@ -161,6 +182,7 @@ public class FirstPanel extends JPanel{
 		//the showStation button
 		showStation = new JButton("Show Station");
 		//TODO add action listener
+		showStation.addActionListener(new showStation());
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new  Insets(10, 5, 10, 1);
@@ -170,7 +192,6 @@ public class FirstPanel extends JPanel{
 		 
 		//JTextArea
 		textArea = new JTextArea(20, 20);
-		//TODO add action listener
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(5, 20, 10, 5);
@@ -181,7 +202,6 @@ public class FirstPanel extends JPanel{
 		
 		//JLabel for compare with dropdown
 		compare = new JLabel("Compare with:");
-		//TODO add button listener
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(20, 5, 20, 1);
@@ -192,15 +212,18 @@ public class FirstPanel extends JPanel{
 		//JComboBox
 		comparedStrings = new JComboBox<String>();
 		//TODO set up combobox
-		//ReadFile file = new ReadFile();
-		//meso = new ArrayList<String>();
-		//meso = file.getListOfWords();
-		String tempString = "";
 		
-		//comparedStrings.addItem(meso.get(index));
+		meso = new ArrayList<String>();
+		meso = file.getListOfWords();
+		
+		//for loop that adds the strings to the jcombobox
+		for(int index = 0; index < meso.size(); ++index)
+		{
+		comparedStrings.addItem(meso.get(index));
+		}
 		
 		
-		comparedStrings.addItem(chosenWord);
+		comparedStrings.addItem(writenWord);
 	
 		
 		constraints = new GridBagConstraints();
@@ -212,6 +235,7 @@ public class FirstPanel extends JPanel{
 		//Calculate button
 		calculate = new JButton("Calculate HD");
 		//TODO make calculate button work
+		calculate.addActionListener(new calculateHD());
 		
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 5, 15, 0);
@@ -267,7 +291,6 @@ public class FirstPanel extends JPanel{
 		//JTextField0
 		textField0 = new JTextField(12);
 		textField0.setEditable(false);
-		//TODO
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 10);
 		constraints.gridx = 1;
@@ -277,7 +300,6 @@ public class FirstPanel extends JPanel{
 		//JTextField1
 		textField1 = new JTextField(12);
 		textField1.setEditable(false);
-		//TODO
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 10);
 		constraints.gridx = 1;
@@ -287,7 +309,6 @@ public class FirstPanel extends JPanel{
 		//JTextField2
 		textField2 = new JTextField(12);
 		textField2.setEditable(false);
-		//TODO
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 10);
 		constraints.gridx = 1;
@@ -297,7 +318,6 @@ public class FirstPanel extends JPanel{
 		//JTextField3
 		textField3 = new JTextField(12);
 		textField3.setEditable(false);
-		//TODO
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 10);
 		constraints.gridx = 1;
@@ -307,7 +327,6 @@ public class FirstPanel extends JPanel{
 		//JTextField4
 		textField4 = new JTextField(12);
 		textField4.setEditable(false);
-		//TODO
 		constraints = new GridBagConstraints();
 		constraints.insets = new Insets(10, 20, 10, 10);
 		constraints.gridx = 1;
@@ -316,7 +335,7 @@ public class FirstPanel extends JPanel{
 		
 		//add station button
 		addStation = new JButton("Add Station");
-		//TODO set the station button
+		//TODO
 		addStation.addActionListener(new addWord());
 		
 		
@@ -362,16 +381,88 @@ public class FirstPanel extends JPanel{
 	
 	
 	/**
-	 * The button for the JButton CalculateHD
+	 * The button for the showStation it takes the value of the JTextField hamInput
+	 * It then shows the Strings with that hamming distance value compared to chosenWord
+	 * The hamInput is taken and then if loops are used to decide which arrayList to iterate through.
+	 */
+	
+	public class showStation implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			
+			//setHam input text to an int
+			int input = Integer.parseInt(hamInput.getText());
+			
+			//shows strings with hamming distance of one
+			if(input == 1)
+			{
+				for(int index = 0; index < arrayOne.size(); ++index)
+				{
+					textArea.setText(arrayOne.get(index));
+				}
+			}
+			
+			//shows strings with hamming distance of two
+			if(input == 2)
+			{
+				for(int index = 0; index < arrayTwo.size(); ++index)
+				{
+					textArea.setText(arrayTwo.get(index));
+				}
+			}
+			
+			//shows strings with hamming distance of three
+			if(input == 3)
+			{
+				for(int index = 0; index < arrayThree.size(); ++index)
+				{
+					textArea.setText(arrayThree.get(index));
+				}
+			}
+			
+			//shows strings with hamming distance of four
+			if(input == 4)
+			{
+				for(int index = 0; index < arrayFour.size(); ++index)
+				{
+					textArea.setText(arrayFour.get(index));
+				}
+			}
+		}
+	}
+	
+	
+	
+	/**
+	 * The button for the JButton calculate
+	 * It calculates the hamming distance between the chosen string in the JComboBox and it assigns the number of strings that
+	 * have a hamming distance of 0, 1, 2, 3, 4 and it puts them in their respective boxes
+	 * It also finds finds the strings and adds them to their respective arrayLists
 	 * @author caleb
 	 *
 	 */
+	
 	public class calculateHD implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
+			chosenWord = (String) comparedStrings.getSelectedItem();
+			file.hammingDistances(chosenWord);
 			
+			// set the text fields with their values
+			textField0.setText(Integer.toString(file.getHamZero()));
+			textField1.setText(Integer.toString(file.getHamOne()));
+			textField2.setText(Integer.toString(file.getHamTwo()));
+			textField3.setText(Integer.toString(file.getHamThree()));
+			textField4.setText(Integer.toString(file.getHamFour()));
+			
+			//set the arrays as well
+			arrayZero = file.getListZero();
+			arrayOne = file.getListOne();
+			arrayTwo = file.getListTwo();
+			arrayThree = file.getListThree();
+			arrayFour = file.getListFour();
 		}
 	};
+	
 	
 	
 	
@@ -381,6 +472,7 @@ public class FirstPanel extends JPanel{
 	 * @author caleb
 	 *
 	 */
+	
 	 public class addWord implements ActionListener {
         public void actionPerformed(ActionEvent e) {
     	writenWord = stationAdd.getText();
@@ -389,12 +481,14 @@ public class FirstPanel extends JPanel{
     	if (valid) {
     	comparedStrings.addItem(stationAdd.getText()); 
     	validTextBox.setText("Valid String");
+    	//meso.add(writenWord);
     	}
     	if(!valid)
     	{
     		validTextBox.setText("Invalid String");
     	}
         }
-	    }
+	 }
+	 
 	 
 }

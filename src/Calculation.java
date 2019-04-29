@@ -1,8 +1,9 @@
 public class Calculation {
 	/**
-	 * The constructor initializes the arrayList and fills it up with the Mesonet Strings
+	 * A class that checks to see if a word is valid or not. 
+	 * The class is also used to see calculate the hamming distance of various strings
 	 */
-	public Calculation() 
+	public Calculation()
 	{
 	}
 	
@@ -27,15 +28,4 @@ public class Calculation {
 		}
 		return true;
 	}
-	
-	public int hammingDistance(String word)
-	{
-		
-		
-		
-		
-		return 0;
-	}
-	
-	
 }
