@@ -107,6 +107,7 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		//used to keep count of the distance
 		int distance = 0;
 		String tempWord = "";
+		this.clearList();
 		/**
 		 * A for loop to iterate through the listOfWords array list. The first for loop resets the distance variable and initializes 
 		 * temp word with the next word in listOfWords.
@@ -135,13 +136,13 @@ private ArrayList<String> listFour = new ArrayList<String>();
 				listZero.add(tempWord);
 			}
 			
-			if(distance ==1)
+			if(distance == 1)
 			{
 				++hammingOne;
 				listOne.add(tempWord); 
 			}
 			
-			if(distance ==2)
+			if(distance == 2)
 			{
 				++hammingTwo;
 				listTwo.add(tempWord); 
@@ -159,6 +160,50 @@ private ArrayList<String> listFour = new ArrayList<String>();
 				listFour.add(tempWord);
 			}
 		}
+	}
+	
+	/**
+	 * a method that calculates the individual ascii value of a string rounded up
+	 * It uses a for loop to add up the total ascii value of the string then it divides by the length of the string
+	 * then uses math.ceil to round up
+	 * @param word
+	 * @return the ascii value rounded up
+	 */
+	public int calAsciiUp(String word) 
+	{
+		double value = 0;
+		for (int index = 0; index < word.length(); ++index)
+		{
+			value = value + (double)word.charAt(index);
+		}
+		
+		double average = value/word.length();
+		
+		int upAverage = (int)Math.ceil(average);
+		
+		return upAverage;
+	}
+	
+	/**
+	 * a method that calculates the individual ascii value of a string rounded down
+	 * It uses a for loop to add up the total ascii value of the string then it divides by the length of the string
+	 * then uses math.floor to round down
+	 * @param word
+	 * @return the ascii value rounded down
+	 */
+	public int calAsciiDown(String word)
+	{
+		double value = 0;
+		for (int index = 0; index < word.length(); ++index)
+		{
+			value = value + (double)word.charAt(index);
+		}
+		
+		double average = value/word.length();
+		
+		int downAverage = (int)Math.floor(average);
+		
+		return downAverage;
 	}
 	
 	
@@ -251,6 +296,15 @@ private ArrayList<String> listFour = new ArrayList<String>();
 	public ArrayList<String> getListOfWords()
 	{
 		return listOfWords;	
+	}
+	
+	public void clearList()
+	{
+		listZero = new ArrayList<String>();
+		listOne = new ArrayList<String>();
+		listTwo = new ArrayList<String>();
+		listThree = new ArrayList<String>();
+		listFour = new ArrayList<String>();
 	}
 
 }

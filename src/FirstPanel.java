@@ -131,7 +131,34 @@ public class FirstPanel extends JPanel{
 	
 	//A JLabel that says "Valid word:"
 	private JLabel test;
-
+	
+	//A JButton that calculates the ascii Value
+	private JButton getString;
+	
+	//A TextBox to input a string
+	private JTextField asciiBox;
+	
+	//JLabel to that says "Ascii word"
+	private JLabel ascii;
+	
+	//A TextArea with all of the strings that share said ascii value
+	private JTextArea asciiArea;
+	
+	//A JButton that finds the ascii value of the String in asciiBox
+	private JButton calculateAscii;
+	
+	//JLabel that says asciiValue Round Up
+	private JLabel up;
+	
+	//JLabel that says Rounded Down
+	private JLabel down;
+	
+	
+	//JTextField for rounded up
+	private JTextField roundUp;
+	
+	//JTextField for rounded down
+	private JTextField roundDown;
 	
 	
 	public FirstPanel() throws IOException
@@ -377,6 +404,82 @@ public class FirstPanel extends JPanel{
 		constraints.gridy = 0;
 		this.add(validTextBox, constraints);
 		
+		//AsciiValue button
+		getString = new JButton("Get String");
+		getString.addActionListener(new getWord());
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 3;
+		constraints.gridy = 1;
+		constraints.gridwidth = 2;
+		this.add(getString, constraints);
+		
+		//TextField where string is held
+		asciiBox = new JTextField(12);
+		asciiBox.setEditable(false);
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 4;
+		constraints.gridy = 2;
+		this.add(asciiBox, constraints);
+		
+		//label to clarify what is in the asciiBox
+		ascii = new JLabel("Ascii Word:");
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 3;
+		constraints.gridy = 2;
+		this.add(ascii, constraints);
+		
+		//JButton that calculates ascii value
+		calculateAscii = new JButton("Calculate Ascii Value");
+		calculateAscii.addActionListener(new getAsciiAverages());
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 3;
+		constraints.gridy = 3;
+		constraints.gridwidth = 2;
+		this.add(calculateAscii, constraints);
+		
+		//JLabel that says round up
+		up = new JLabel("Rounded up:");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 3;
+		constraints.gridy = 4;
+		this.add(up, constraints);
+		
+		//JLabel that says round down
+		down = new JLabel("Rounded down:");
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 3;
+		constraints.gridy = 5;
+		this.add(down, constraints);
+		
+		//round up textField
+		roundUp = new JTextField(12);
+		roundUp.setEditable(false);
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 4;
+		constraints.gridy = 4;
+		this.add(roundUp, constraints);
+		
+		//round down textField
+		roundDown = new JTextField(12);
+		roundDown.setEditable(false);
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(10, 10, 10, 10);
+		constraints.gridx = 4;
+		constraints.gridy = 5;
+		this.add(roundDown, constraints);
 		}
 	
 	
@@ -484,7 +587,6 @@ public class FirstPanel extends JPanel{
 	 * @author caleb
 	 *
 	 */
-	
 	 public class addWord implements ActionListener {
         public void actionPerformed(ActionEvent e) {
     	writenWord = stationAdd.getText();
@@ -493,7 +595,12 @@ public class FirstPanel extends JPanel{
     	if (valid) {
     	meso.add(writenWord);
     	Collections.sort(meso);
-    	comparedStrings.addItem(stationAdd.getText());
+    	comparedStrings.removeAllItems();
+    	for(int index = 0; index < meso.size(); ++index)
+		{
+		comparedStrings.addItem(meso.get(index));
+		}
+    	//comparedStrings.addItem(stationAdd.getText());
     	validTextBox.setText("Valid String");
     	//meso.add(writenWord);
     	}
@@ -504,5 +611,28 @@ public class FirstPanel extends JPanel{
         }
 	 }
 	 
+	 /**
+	  * A button that when pressed takes the word in the JComboBox and puts it in the JTextField asciiBox
+	  * @author caleb
+	  *
+	  */
+	 public class getWord implements ActionListener {
+	        public void actionPerformed(ActionEvent e) {
+	       asciiBox.setText((String)comparedStrings.getSelectedItem());
+	        }
+	       	}
+	 
+	 public class getAsciiAverages implements ActionListener {
+	        public void actionPerformed(ActionEvent e) {
+	        	
+	        	String word = asciiBox.getText();
+	        	
+	        	int up = file.calAsciiUp(word);
+	        	int down = file.calAsciiDown(word);
+	        	
+	        	roundUp.setText(Integer.toString(up));
+	        	roundDown.setText(Integer.toString(down));
+	        }
+	 		}
 	 
 }
