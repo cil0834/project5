@@ -8,7 +8,7 @@ public class Calculation {
 	ArrayList<String> wordList;
 	
 	/**
-	 * A class that checks to see if a word is valid or not. 
+	 * A class that checks to see if a word is valid or not
 	 * The class is also used to see calculate the hamming distance of various strings
 	 */
 	public Calculation()
@@ -47,8 +47,6 @@ public class Calculation {
 			{
 				return false;
 			}
-			
-			
 		}
 		wordList.add(word);
 		return true;
