@@ -591,7 +591,12 @@ public class FirstPanel extends JPanel{
         public void actionPerformed(ActionEvent e) {
     	writenWord = stationAdd.getText();
     	Calculation calc = new Calculation();
-    	valid = calc.validString(writenWord);
+    	try {
+			valid = calc.validString(writenWord);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	if (valid) {
     	meso.add(writenWord);
     	Collections.sort(meso);

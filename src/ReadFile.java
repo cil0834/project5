@@ -16,7 +16,6 @@ public class ReadFile {
  */
 private ArrayList<String> listOfWords;
 
-
 /**
  * hamming distance 0
  */
