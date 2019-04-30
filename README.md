@@ -63,14 +63,31 @@ listZero ... listFour
 These list are used by the JTextArea so the strings with the respective hamming distances in relation to the choesn word can
 be shown
   
-Finally the method ClearList is used to clear all of the arrayList listZero ... listFour
+The method ClearList is used to clear all of the arrayList listZero ... listFour
 This method is used in the hammingDistances method so that when a new word is choesn the arrayLists reset and don't show incorrect
 values in the strings
+
+The asciiValues method takes in the chosen word which is the word in the 
 
 
 The second class is the FirstPanel class. It was named FirstPanel, because a second panel was planned but it never happened.
 
+There are two sections to the first panel.
 
+The first section deals solely with calculating the hamming distance of a chosen word and with showing the words in the 
+JComboBox's hamming distance in relation to the chosen word.
+
+The second section hasa box that sends out an error message if something wrong was done.
+Below the error box there are various components that do variou the ascii value of the string in the JComboBox
+
+The first part of the panel is the JLabel that says "Enter Hamming Dist:"
+Next to that component is a JTextField that represents the value of the JSlider under it.
+The JSlider can be moved to change the value of the JTextField, and when the Show Station button under it is hit
+the strings with a hamming distance of the value in the JTextField in relation to the String in the JComboBox are displayed
+If the Show Station button is hit before there is a value in JTextField is assigned an error message is displayed in the 
+error JTextField
+
+Various objects
 
 
 
