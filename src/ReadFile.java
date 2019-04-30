@@ -313,6 +313,11 @@ private ArrayList<String> asciiList = new ArrayList<String>();
 		listFour = new ArrayList<String>();
 	}
 	
+	/**
+	 * Calculate the strings that share an ascii value with the chosen word
+	 * @param word
+	 * @param meso
+	 */
 	public void asciiValues(String word, ArrayList<String> meso)
 	{
 		this.clearAsciiList();
@@ -331,6 +336,10 @@ private ArrayList<String> asciiList = new ArrayList<String>();
 		}
 	}
 	
+	/**
+	 * A method that returns the cleared asciiList variable
+	 * @return asciiList
+	 */
 	public ArrayList<String> getAsciiList()
 	{
 		return asciiList;

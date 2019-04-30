@@ -507,11 +507,18 @@ public class FirstPanel extends JPanel{
 	 * It then shows the Strings with that hamming distance value compared to chosenWord
 	 * The hamInput is taken and then if loops are used to decide which arrayList to iterate through.
 	 */
-	
 	public class showStation implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			//setHam input text to an int
-			int input = slider.getValue();
+			int input = 0;
+			if(hamInput.getText().equals(""))
+			{
+				validTextBox.setText("No value chosen");
+			}
+	
+			else {
+			input = Integer.parseInt(hamInput.getText());
+			validTextBox.setText("");
 			String text = "";
 			String tempString ="";
 			//shows strings with hamming distance of one
@@ -560,6 +567,7 @@ public class FirstPanel extends JPanel{
 					text = text + tempString + "\n";
 				}
 				textArea.setText(text);
+			}
 			}
 		}
 	}
@@ -631,6 +639,8 @@ public class FirstPanel extends JPanel{
 	 
 	 /**
 	  * A button that when pressed takes the word in the JComboBox and puts it in the JTextField asciiBox
+	  * Additionaly when the button is pressed all of the strings that share an ascii value with the chosen word
+	  * are put into the a JTextArea
 	  * @author caleb
 	  *
 	  */
@@ -665,32 +675,39 @@ public class FirstPanel extends JPanel{
 	 
 	 /**
 	  * A method that test if a word is valid
+	  * There are three test
+	  * 1. The word has to be length 4 only
+	  * 2. The word cannot already be in the meso arrayList
+	  * 3. The word can only be made up of Capital Letters
 	  * @param word
 	  * @return whether the string is valid or not
 	  */
 	 public boolean valid(String word)
 	 {
+	 //test to see it's length 4
 		 if (word.length() != 4)
 			{
 				return false;
 			}
 			
-			for(int index = 0; index < meso.size(); ++index)
+		//test to see if the word is already in meso
+		for(int index = 0; index < meso.size(); ++index)
+		{
+			if(word.equals(meso.get(index)))
 			{
-				if(word.equals(meso.get(index)))
-				{
-					return false;
-				}
+				return false;
 			}
-			
-			for (int i = 0; i < word.length(); i++) {
-				char c = word.charAt(i);
-				if (!(c >= 'A' && c <= 'Z'))
-				{
-					return false;
-				}
+		}
+		
+		//test to see if the word is made up of only capital letters
+		for (int i = 0; i < word.length(); i++) {
+			char c = word.charAt(i);
+			if (!(c >= 'A' && c <= 'Z'))
+			{
+				return false;
 			}
-			return true;
+		}
+		return true;
 	 }
 	 
 	 
