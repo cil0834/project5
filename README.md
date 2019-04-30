@@ -87,7 +87,13 @@ the strings with a hamming distance of the value in the JTextField in relation t
 If the Show Station button is hit before there is a value in JTextField is assigned an error message is displayed in the 
 error JTextField
 
-Various objects
+The JComboBox holds all of the strings in the file that is read. However new strings can be added by using the JTextField
+next to the Add Station button. Only strings that are 4 characters long contain capital letters only and are not already
+present in the JComboBox can added. If someone attempts to add an invalid string an error is displayed in the error box. 
+
+The Calculate HD Button displays the number of strings in the JComboBox with a hamming distance of 0, 1, 2, 3, 4 compared to the
+selected String. 
+The value of the hamming distances can be changed by selecting a new String and recalculating.
 
 
 
