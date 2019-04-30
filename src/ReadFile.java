@@ -69,7 +69,7 @@ private ArrayList<String> listFour = new ArrayList<String>();
 /**
  * arrayList for ascii values that are equal
  */
-private ArrayList<String> asciiList;
+private ArrayList<String> asciiList = new ArrayList<String>();
 	
 	
 	
@@ -313,7 +313,33 @@ private ArrayList<String> asciiList;
 		listFour = new ArrayList<String>();
 	}
 	
+	public void asciiValues(String word, ArrayList<String> meso)
+	{
+		this.clearAsciiList();
+		int ascii = calAsciiUp(word);
+		String tempWord = "";
+		int tempAscii = 0;
+		
+		for (int index = 0; index < meso.size(); ++index)
+		{
+			tempWord = meso.get(index);
+			tempAscii = calAsciiUp(tempWord);
+			if(tempAscii == ascii)
+			{
+				asciiList.add(tempWord);
+			}
+		}
+	}
 	
+	public ArrayList<String> getAsciiList()
+	{
+		return asciiList;
+	}
+	
+	public void clearAsciiList()
+	{
+		asciiList = new ArrayList<String>();
+	}
 	
 	
 

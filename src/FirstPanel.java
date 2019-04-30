@@ -160,6 +160,9 @@ public class FirstPanel extends JPanel{
 	//JTextField for rounded down
 	private JTextField roundDown;
 	
+	//JTextArea with string of similar ascii values
+	private JTextArea asciiValues;
+	
 	
 	public FirstPanel() throws IOException
 	{	
@@ -479,6 +482,23 @@ public class FirstPanel extends JPanel{
 		constraints.gridx = 4;
 		constraints.gridy = 5;
 		this.add(roundDown, constraints);
+		
+		
+		//JTextArea with ascii Values
+		asciiValues = new JTextArea(15, 20);
+		asciiValues.setEditable(false);
+		sp = new JScrollPane(asciiValues);
+		this.add(sp);
+		
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(5, 5, 10, 5);
+		constraints.gridx = 3;
+		constraints.gridy = 6;
+		constraints.gridwidth = 2;
+		constraints.gridheight = 7;
+		this.add(sp, constraints);
+		
+		
 		}
 	
 	
@@ -630,6 +650,16 @@ public class FirstPanel extends JPanel{
 	        	
 	        	roundUp.setText(Integer.toString(up));
 	        	roundDown.setText(Integer.toString(down));
+	        	
+	        	file.asciiValues(word, meso);
+	        	ArrayList<String> asciiList = file.getAsciiList();
+	        	String text = "";
+	        	for(int index = 0; index < asciiList.size(); ++index)
+	        	{
+	        		text = text + asciiList.get(index) +"\n";
+	        	}
+	        	
+	        	asciiValues.setText(text);
 	        }
 	 		}
 	 
@@ -662,5 +692,6 @@ public class FirstPanel extends JPanel{
 			}
 			return true;
 	 }
+	 
 	 
 }
