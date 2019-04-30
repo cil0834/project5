@@ -69,7 +69,6 @@ values in the strings
 
 The asciiValues method takes in the chosen word which is the word in the 
 
-
 The second class is the FirstPanel class. It was named FirstPanel, because a second panel was planned but it never happened.
 
 There are two sections to the first panel.
@@ -83,7 +82,9 @@ Below the error box there are various components that do variou the ascii value 
 The first part of the panel is the JLabel that says "Enter Hamming Dist:"
 Next to that component is a JTextField that represents the value of the JSlider under it.
 The JSlider can be moved to change the value of the JTextField, and when the Show Station button under it is hit
-the strings with a hamming distance of the value in the JTextField in relation to the String in the JComboBox are displayed
+the strings with a hamming distance of the value in the JTextField in relation to the String in the JComboBox are displayed 
+int a JTextArea. Since there are sometimes over 100 strings, especially for the hamming 4 value, the JTextArea is put into a 
+scroll pane
 If the Show Station button is hit before there is a value in JTextField is assigned an error message is displayed in the 
 error JTextField
 
@@ -95,12 +96,12 @@ The Calculate HD Button displays the number of strings in the JComboBox with a h
 selected String. 
 The value of the hamming distances can be changed by selecting a new String and recalculating.
 
+Onto the left side of the frame. The error box has already been discussed.
 
-
-
-
-
-
+The get String button gets the word in the JComboBox and assigns it into a JTextField
+The ascii value rounded up and rounded down can then be found by clicking on the Calculate Ascii Value button.
+In addition all of the strings in the JComboBox that share that asciiValue rounded up are displayed in a JTextArea below.
+It should be noted that the JTextArea is put into a scroll pane as well.
 
 
 ![alt text](https://github.com/cil0834/project5/blob/master/Untitled%20Diagram%20(2).png)
