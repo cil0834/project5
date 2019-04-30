@@ -80,4 +80,4 @@ The second class is the FirstPanel class. It was named FirstPanel, because a sec
 
 
 
-![alt text](https://github.com/cil0834/project5/blob/master/Final%20UML.png)
+![alt text](https://github.com/cil0834/project5/blob/master/Untitled%20Diagram%20(2).png)
