@@ -521,6 +521,14 @@ public class FirstPanel extends JPanel{
 			validTextBox.setText("");
 			String text = "";
 			String tempString ="";
+			chosenWord = (String) comparedStrings.getSelectedItem();
+			file.hammingDistances(chosenWord, meso);
+			arrayZero = file.getListZero();
+			arrayOne = file.getListOne();
+			arrayTwo = file.getListTwo();
+			arrayThree = file.getListThree();
+			arrayFour = file.getListFour();
+			
 			//shows strings with hamming distance of one
 			if(input == 1)
 			{
