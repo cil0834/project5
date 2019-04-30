@@ -65,6 +65,11 @@ private ArrayList<String> listThree = new ArrayList<String>();
  * arrayList for distance 4
  */
 private ArrayList<String> listFour = new ArrayList<String>();
+
+/**
+ * arrayList for ascii values that are equal
+ */
+private ArrayList<String> asciiList;
 	
 	
 	
@@ -205,7 +210,6 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		return downAverage;
 	}
 	
-	
 	/**
 	 * returns hamZero
 	 */
@@ -297,6 +301,9 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		return listOfWords;	
 	}
 	
+	/**
+	 * A method that clears the hamming lists
+	 */
 	public void clearList()
 	{
 		listZero = new ArrayList<String>();
@@ -305,5 +312,9 @@ private ArrayList<String> listFour = new ArrayList<String>();
 		listThree = new ArrayList<String>();
 		listFour = new ArrayList<String>();
 	}
+	
+	
+	
+	
 
 }

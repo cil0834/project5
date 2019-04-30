@@ -165,7 +165,6 @@ public class FirstPanel extends JPanel{
 	{	
 		//set up the hamming label
 		this.setLayout(new GridBagLayout());
-		this.setLocation(0, 0);
 		GridBagConstraints constraints = null;
 		
 		//set constraints for hamLabel
@@ -395,7 +394,7 @@ public class FirstPanel extends JPanel{
 		constraints.gridy = 0;
 		this.add(test, constraints); 
 		
-		
+		//The text box that reports an error
 		validTextBox = new JTextField(12);
 		validTextBox.setEditable(false);
 		constraints = new GridBagConstraints();
@@ -590,13 +589,7 @@ public class FirstPanel extends JPanel{
 	 public class addWord implements ActionListener {
         public void actionPerformed(ActionEvent e) {
     	writenWord = stationAdd.getText();
-    	Calculation calc = new Calculation();
-    	try {
-			valid = calc.validString(writenWord);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    	valid = valid(writenWord);
     	if (valid) {
     	meso.add(writenWord);
     	Collections.sort(meso);
@@ -639,5 +632,35 @@ public class FirstPanel extends JPanel{
 	        	roundDown.setText(Integer.toString(down));
 	        }
 	 		}
+	 
+	 /**
+	  * A method that test if a word is valid
+	  * @param word
+	  * @return whether the string is valid or not
+	  */
+	 public boolean valid(String word)
+	 {
+		 if (word.length() != 4)
+			{
+				return false;
+			}
+			
+			for(int index = 0; index < meso.size(); ++index)
+			{
+				if(word.equals(meso.get(index)))
+				{
+					return false;
+				}
+			}
+			
+			for (int i = 0; i < word.length(); i++) {
+				char c = word.charAt(i);
+				if (!(c >= 'A' && c <= 'Z'))
+				{
+					return false;
+				}
+			}
+			return true;
+	 }
 	 
 }

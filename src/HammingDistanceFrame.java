@@ -40,7 +40,7 @@ public class HammingDistanceFrame extends JFrame{
         
         //Display the window.
         frame.pack();
-        frame.setVisible(true); 
+        frame.setVisible(true);
 	    }
  
 	public static void main(String[] args) throws IOException {
