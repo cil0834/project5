@@ -103,5 +103,10 @@ The ascii value rounded up and rounded down can then be found by clicking on the
 In addition all of the strings in the JComboBox that share that asciiValue rounded up are displayed in a JTextArea below.
 It should be noted that the JTextArea is put into a scroll pane as well.
 
+Finally HammingDistanceFrame class is the class that has the main method and the method createAndShowGui
+CreateAndShowGui just creates the frame and calls the FirstPanel constructor to create a panel and add it to the frame.
+The main method then calls CreateANdShow method to create the actual gui menue.
+
+
 
 ![alt text](https://github.com/cil0834/project5/blob/master/Untitled%20Diagram%20(2).png)
